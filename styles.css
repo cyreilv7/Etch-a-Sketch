@@ -2,6 +2,10 @@ body {
     background-color: #f3f3f3;
 }
 
+.main-container {
+    display: flex;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -13,4 +17,13 @@ body {
 .pixel {
     border: .5px dotted gray;
     box-sizing: border-box;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: column;
+}
+
+.toolbar >* {
+    padding: .5em;
 }
