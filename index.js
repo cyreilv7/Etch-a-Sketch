@@ -29,18 +29,25 @@ function updatePixelValue(e) {
 }
 
 
-function enableToggle() {
-
+function toggleOn(e) {
+    this.toggle = 'active';
+    // console.log(this);
 }
 
 function draw(e) {
     if (e.target && e.target.classList[0] == 'pixel') {
-        e.target.style.backgroundColor = 'black';
+        if (this.toggle == 'active') { 
+            e.target.style.backgroundColor = 'black';
+        }
     }
 }
 
-function disableToggle() {
-
+function toggleOff(e) {
+    console.log(this);
+    if (e.type == 'mouseleave' && e.target !== this) {
+        return;
+    }
+    this.toggle = 'inactive';
 }
 
 // intial output
@@ -55,4 +62,9 @@ sliderOutput.textContent = `Pixels: ${slider.value}`;
 // draw on grid
 let pixels = document.querySelectorAll('.pixel');
 let container = document.querySelector('.container');
+container.addEventListener('mousedown', toggleOn);
 container.addEventListener('mouseover', draw);
+container.addEventListener('mouseleave', toggleOff); // mouseleave instead of mouseout prevents bubbling to its children
+container.addEventListener('mouseup', toggleOff);
+
+// container.addEventListener('')
