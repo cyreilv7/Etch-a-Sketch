@@ -36,7 +36,7 @@ function toggleOn(e) {
 
 function draw(e) {
     if (e.target && e.target.classList[0] == 'pixel') {
-        if (this.toggle == 'active') { 
+        if (this.toggle == 'active' || e.type == 'click') { 
             e.target.style.backgroundColor = 'black';
         }
     }
@@ -66,5 +66,4 @@ container.addEventListener('mousedown', toggleOn);
 container.addEventListener('mouseover', draw);
 container.addEventListener('mouseleave', toggleOff); // mouseleave instead of mouseout prevents bubbling to its children
 container.addEventListener('mouseup', toggleOff);
-
-// container.addEventListener('')
+container.addEventListener('click', draw);
