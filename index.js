@@ -25,14 +25,34 @@ function updateGrid(numPixels) {
 function updatePixelValue(e) {
     let numPixels = this.value;
     sliderOutput.textContent = `Pixels: ${numPixels}`;
-    let height = width = Math.sqrt(numPixels);
     updateGrid(numPixels);
 }
 
-let slider = document.querySelector('.slider');
-let sliderOutput = document.querySelector('.slider-output');
 
-sliderOutput.textContent = slider.value;
+function enableToggle() {
+
+}
+
+function draw(e) {
+    if (e.target && e.target.classList[0] == 'pixel') {
+        e.target.style.backgroundColor = 'black';
+    }
+}
+
+function disableToggle() {
+
+}
+
+// intial output
 createGrid(16, 16);
 
+// change pixel density based on slider
+let slider = document.querySelector('.slider');
+let sliderOutput = document.querySelector('.slider-output');
 slider.addEventListener('mouseup', updatePixelValue);
+sliderOutput.textContent = `Pixels: ${slider.value}`;
+
+// draw on grid
+let pixels = document.querySelectorAll('.pixel');
+let container = document.querySelector('.container');
+container.addEventListener('mouseover', draw);
