@@ -1,6 +1,6 @@
 
 function createGrid(canvasWidth, canvasHeight) {
-    let container = document.querySelector('.container');
+    let container = document.getElementById('grid');
     for (let i = 0; i < canvasWidth; i++) {
         let row = document.createElement('div');
         row.style.display = 'flex';
@@ -15,12 +15,18 @@ function createGrid(canvasWidth, canvasHeight) {
     }    
 }
 
+function updateGrid(numPixels) {
+    let container = document.getElementById('grid');
+    container.innerHTML = '';
+    let canvasWidth = canvasHeight = Math.round(Math.sqrt(numPixels));
+    createGrid(canvasWidth, canvasHeight);
+}
 
 function updatePixelValue(e) {
     let numPixels = this.value;
     sliderOutput.textContent = `Pixels: ${numPixels}`;
     let height = width = Math.sqrt(numPixels);
-    createGrid(height, width);
+    updateGrid(numPixels);
 }
 
 let slider = document.querySelector('.slider');
