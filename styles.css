@@ -11,6 +11,6 @@ body {
 }
 
 .pixel {
-    border: .5px solid black;
+    border: .5px dotted gray;
     box-sizing: border-box;
 }
