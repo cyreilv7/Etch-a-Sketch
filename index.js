@@ -1,6 +1,5 @@
 
 function createGrid(canvasWidth, canvasHeight) {
-    let container = document.getElementById('grid');
     for (let i = 0; i < canvasWidth; i++) {
         let row = document.createElement('div');
         row.style.display = 'flex';
@@ -15,17 +14,16 @@ function createGrid(canvasWidth, canvasHeight) {
     }    
 }
 
-function updateGrid(numPixels) {
-    let container = document.getElementById('grid');
+function createNewGrid(numPixels) {
     container.innerHTML = '';
     let canvasWidth = canvasHeight = Math.round(Math.sqrt(numPixels));
     createGrid(canvasWidth, canvasHeight);
 }
 
 function updatePixelValue(e) {
-    let numPixels = this.value;
+    let numPixels = slider.value;
     sliderOutput.textContent = `Pixels: ${numPixels}`;
-    updateGrid(numPixels);
+    createNewGrid(numPixels);
 }
 
 
@@ -50,12 +48,10 @@ function toggleOff(e) {
     this.toggle = 'inactive';
 }
 
-// intial output
-createGrid(16, 16);
-
 // change pixel density based on slider
 let slider = document.querySelector('.slider');
 let sliderOutput = document.querySelector('.slider-output');
+window.addEventListener('load', updatePixelValue);
 slider.addEventListener('mouseup', updatePixelValue);
 sliderOutput.textContent = `Pixels: ${slider.value}`;
 
