@@ -1,3 +1,11 @@
+const grid = document.querySelector('.container');
+const clearBtn = document.querySelector('.clear-all-btn');
+
+// button functionality
+clearBtn.addEventListener('click', () => {
+    createNewGrid(slider.value); // pass in current number of pixels
+});
+
 
 function createGrid(canvasWidth, canvasHeight) {
     for (let i = 0; i < canvasWidth; i++) {
