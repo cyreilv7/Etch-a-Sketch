@@ -63,3 +63,9 @@ container.addEventListener('mouseover', draw);
 container.addEventListener('mouseleave', toggleOff); // mouseleave instead of mouseout prevents bubbling to its children
 container.addEventListener('mouseup', toggleOff);
 container.addEventListener('click', draw);
+
+// clear grid
+let clearBtn = document.querySelector('.clear-all-btn');
+clearBtn.addEventListener('click', () => {
+    createNewGrid(slider.value); // pass in current number of pixels
+});
