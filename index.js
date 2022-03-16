@@ -9,10 +9,10 @@ clearBtn.addEventListener('click', () => {
 
 function createGrid(canvasWidth, canvasHeight) {
     for (let i = 0; i < canvasWidth; i++) {
-        let row = document.createElement('div');
+        const row = document.createElement('div');
         row.style.display = 'flex';
         for (let j = 0; j < canvasHeight; j++) {
-            let pixel = document.createElement('div');
+            const pixel = document.createElement('div');
             pixel.classList.add('pixel');
             pixel.style.height = `${container.clientHeight / canvasHeight}px`;
             pixel.style.width = `${container.clientWidth / canvasWidth}px`;
@@ -29,7 +29,7 @@ function createNewGrid(numPixels) {
 }
 
 function updatePixelValue(e) {
-    let numPixels = slider.value;
+    const numPixels = slider.value;
     sliderOutput.textContent = `Pixels: ${numPixels}`;
     createNewGrid(numPixels);
 }
@@ -57,8 +57,8 @@ function toggleOff(e) {
 }
 
 // change pixel density based on slider
-let slider = document.querySelector('.slider');
-let sliderOutput = document.querySelector('.slider-output');
+const slider = document.querySelector('.slider');
+const sliderOutput = document.querySelector('.slider-output');
 window.addEventListener('load', updatePixelValue);
 slider.addEventListener('mouseup', updatePixelValue);
 sliderOutput.textContent = `Pixels: ${slider.value}`;
