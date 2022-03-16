@@ -14,17 +14,18 @@ function createGrid(canvasWidth, canvasHeight) {
         for (let j = 0; j < canvasHeight; j++) {
             const pixel = document.createElement('div');
             pixel.classList.add('pixel');
-            pixel.style.height = `${container.clientHeight / canvasHeight}px`;
-            pixel.style.width = `${container.clientWidth / canvasWidth}px`;
+            pixel.style.height = `${grid.clientHeight / canvasHeight}px`;
+            pixel.style.width = `${grid.clientWidth / canvasWidth}px`;
+            pixel.addEventListener('mouseover', changeColor);
             row.appendChild(pixel);
         }
-        container.appendChild(row);
+        grid.appendChild(row);
     }    
 }
 
 function createNewGrid(numPixels) {
-    container.innerHTML = '';
-    let canvasWidth = canvasHeight = Math.round(Math.sqrt(numPixels));
+    grid.innerHTML = '';
+    const canvasWidth = canvasHeight = Math.round(Math.sqrt(numPixels));
     createGrid(canvasWidth, canvasHeight);
 }
 
@@ -34,26 +35,14 @@ function updatePixelValue(e) {
     createNewGrid(numPixels);
 }
 
+let mouseDown = false;
+document.addEventListener('mousedown', () => mouseDown = true);
+document.addEventListener('mouseup', () => mouseDown = false);
+grid.addEventListener('mouseleave', () => mouseDown = false);
 
-function toggleOn(e) {
-    this.toggle = 'active';
-    // console.log(this);
-}
-
-function draw(e) {
-    if (e.target && e.target.classList[0] == 'pixel') {
-        if (this.toggle == 'active' || e.type == 'click') { 
-            e.target.style.backgroundColor = 'black';
-        }
-    }
-}
-
-function toggleOff(e) {
-    console.log(this);
-    if (e.type == 'mouseleave' && e.target !== this) {
-        return;
-    }
-    this.toggle = 'inactive';
+function changeColor(e) {
+    if (!mouseDown) return;
+    this.style.backgroundColor = 'black';
 }
 
 // change pixel density based on slider
@@ -62,18 +51,3 @@ const sliderOutput = document.querySelector('.slider-output');
 window.addEventListener('load', updatePixelValue);
 slider.addEventListener('mouseup', updatePixelValue);
 sliderOutput.textContent = `Pixels: ${slider.value}`;
-
-// draw on grid
-let pixels = document.querySelectorAll('.pixel');
-let container = document.querySelector('.container');
-container.addEventListener('mousedown', toggleOn);
-container.addEventListener('mouseover', draw);
-container.addEventListener('mouseleave', toggleOff); // mouseleave instead of mouseout prevents bubbling to its children
-container.addEventListener('mouseup', toggleOff);
-container.addEventListener('click', draw);
-
-// clear grid
-let clearBtn = document.querySelector('.clear-all-btn');
-clearBtn.addEventListener('click', () => {
-    createNewGrid(slider.value); // pass in current number of pixels
-});
