@@ -1,11 +1,26 @@
 const grid = document.querySelector('.container');
 const clearBtn = document.querySelector('.clear-all-btn');
+const rainbowModeBtn = document.querySelector('.rainbow-mode-btn');
+const eraser = document.querySelector('.eraser');
+
+
+let rainbowMode = false;
+let eraseMode = false;
 
 // button functionality
 clearBtn.addEventListener('click', () => {
     createNewGrid(slider.value); // pass in current number of pixels
 });
 
+rainbowModeBtn.addEventListener('click', () => {
+    rainbowMode = !rainbowMode;
+    rainbowModeBtn.classList.toggle('on');
+});
+
+eraser.addEventListener('click', () => {
+    eraseMode = !eraseMode;
+    eraser.classList.toggle('on');
+});
 
 function createGrid(canvasWidth, canvasHeight) {
     for (let i = 0; i < canvasWidth; i++) {
@@ -40,9 +55,25 @@ document.addEventListener('mousedown', () => mouseDown = true);
 document.addEventListener('mouseup', () => mouseDown = false);
 grid.addEventListener('mouseleave', () => mouseDown = false);
 
+function getRandomColor(){
+    const R = Math.round(Math.random() * 256);
+    const G = Math.round(Math.random() * 256);
+    const B = Math.round(Math.random() * 256);
+    return `rgb(${R}, ${G}, ${B})`;
+}
+
 function changeColor(e) {
     if (!mouseDown) return;
-    this.style.backgroundColor = 'black';
+
+    let backgroundColor = '';
+    if (rainbowMode) {
+        backgroundColor = getRandomColor();
+    } else if (eraseMode) {
+        backgroundColor = '#ffffff';
+    } else {
+        backgroundColor = 'black';
+    } 
+    this.style.backgroundColor = backgroundColor;
 }
 
 // change pixel density based on slider
