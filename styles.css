@@ -23,7 +23,10 @@ body {
 .toolbar {
     display: flex;
     flex-direction: column;
-    margin-right: 3em;
+.color-selector {
+    height: 70px;
+    width: 70px;
+    align-self: center;
 }
 
 .toolbar >* {

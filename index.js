@@ -1,14 +1,19 @@
-const grid = document.querySelector('.container');
+const colorSelector = document.querySelector('.color-selector');
+const drawBtn = document.querySelector('draw-btn');
 const clearBtn = document.querySelector('.clear-all-btn');
 const rainbowModeBtn = document.querySelector('.rainbow-mode-btn');
 const eraser = document.querySelector('.eraser');
 const gridlineToggleBtn = document.querySelector('.gridline-toggle');
 
+let currentColor = 'black';
 let rainbowMode = false;
 let eraseMode = false;
 let gridlineOff = false;
 
 // button functionality
+
+colorSelector.addEventListener('change', selectColor);
+
 clearBtn.addEventListener('click', () => {
     createNewGrid(slider.value); // pass in current number of pixels
 });
@@ -61,7 +66,11 @@ document.addEventListener('mousedown', () => mouseDown = true);
 document.addEventListener('mouseup', () => mouseDown = false);
 grid.addEventListener('mouseleave', () => mouseDown = false);
 
-function getRandomColor(){
+function selectColor(e) {
+    currentColor = this.value;
+}
+
+function getRandomColor(e) {
     const R = Math.round(Math.random() * 256);
     const G = Math.round(Math.random() * 256);
     const B = Math.round(Math.random() * 256);
@@ -78,7 +87,7 @@ function changeColor(e) {
     } else if (eraseMode) {
         backgroundColor = '#ffffff';
     } else {
-        backgroundColor = 'black';
+        backgroundColor = currentColor;
     } 
     this.style.backgroundColor = backgroundColor;
 }
