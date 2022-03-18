@@ -2,10 +2,11 @@ const grid = document.querySelector('.container');
 const clearBtn = document.querySelector('.clear-all-btn');
 const rainbowModeBtn = document.querySelector('.rainbow-mode-btn');
 const eraser = document.querySelector('.eraser');
-
+const gridlineToggleBtn = document.querySelector('.gridline-toggle');
 
 let rainbowMode = false;
 let eraseMode = false;
+let gridlineOff = false;
 
 // button functionality
 clearBtn.addEventListener('click', () => {
@@ -22,6 +23,10 @@ eraser.addEventListener('click', () => {
     eraser.classList.toggle('on');
 });
 
+gridlineToggleBtn.addEventListener('click', toggleGridlines);
+
+
+// functions
 function createGrid(canvasWidth, canvasHeight) {
     for (let i = 0; i < canvasWidth; i++) {
         const row = document.createElement('div');
@@ -74,6 +79,20 @@ function changeColor(e) {
         backgroundColor = 'black';
     } 
     this.style.backgroundColor = backgroundColor;
+}
+
+function toggleGridlines(e) {
+    gridlineOff = !gridlineOff;
+    const pixels = document.querySelectorAll('.pixel');
+    if (gridlineOff) {
+        pixels.forEach(pixel => {
+            pixel.style.border = 'none';
+        });
+    } else {
+        pixels.forEach(pixel => {
+            pixel.style.removeProperty('border');
+        });
+    }
 }
 
 // change pixel density based on slider
