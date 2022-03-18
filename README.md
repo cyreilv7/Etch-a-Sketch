@@ -10,7 +10,7 @@ Engage your creative side by etching a sketch of your wildest and craziest imagi
 6. Change the pixel density ✅
 7. Change the canvas size
 8. Add warning message when progress is about to be lost
-9. Add eraser tool
+9. Add eraser tool ✅
 
 ## Live
 Click [here](https://cyreilv7.github.io/Etch-a-Sketch/) to see a live demo!
