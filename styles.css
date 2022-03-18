@@ -6,7 +6,15 @@ body {
     display: flex;
 }
 
-.container {
+.content {
+    display: flex;
+    gap: 100px;
+    width: 1080px;
+    margin: 0 auto;
+}
+
+
+.grid {
     display: flex;
     flex-direction: column;
     /* border: 1.5px solid black; */
@@ -23,6 +31,9 @@ body {
 .toolbar {
     display: flex;
     flex-direction: column;
+    width: 200px;
+}
+
 .color-selector {
     height: 70px;
     width: 70px;
@@ -59,4 +70,8 @@ body {
 
 button {
     border-radius: .3em;
+}
+
+.slider-container {
+    text-align: center;
 }
