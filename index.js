@@ -37,6 +37,7 @@ function createGrid(canvasWidth, canvasHeight) {
             pixel.style.height = `${grid.clientHeight / canvasHeight}px`;
             pixel.style.width = `${grid.clientWidth / canvasWidth}px`;
             pixel.addEventListener('mouseover', changeColor);
+            pixel.addEventListener('mousedown', changeColor);
             row.appendChild(pixel);
         }
         grid.appendChild(row);
@@ -64,11 +65,12 @@ function getRandomColor(){
     const R = Math.round(Math.random() * 256);
     const G = Math.round(Math.random() * 256);
     const B = Math.round(Math.random() * 256);
+    if (R === 0 && G === 0 && B === 0) return getRandomColor();
     return `rgb(${R}, ${G}, ${B})`;
 }
 
 function changeColor(e) {
-    if (!mouseDown) return;
+    if (!mouseDown && e.type === 'mouseover') return;
 
     let backgroundColor = '';
     if (rainbowMode) {
