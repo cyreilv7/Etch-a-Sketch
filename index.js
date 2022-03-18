@@ -25,25 +25,9 @@ let gridlineOff = false;
 
 // button functionalities
 colorSelector.addEventListener('input', selectColor);
-
-clearBtn.addEventListener('click', () => {
-    createNewGrid(slider.value); // pass in current number of pixels
-});
-
-rainbowModeBtn.addEventListener('click', () => {
-    rainbowMode = !rainbowMode;
-    rainbowModeBtn.classList.toggle('on');
-});
-
-eraser.addEventListener('click', () => {
-    eraseMode = !eraseMode;
-    eraser.classList.toggle('on');
-});
-
-gridlineToggleBtn.addEventListener('click', toggleGridlines);
-
-function changeMode(mode) {
-    toggles.forEach(btn => btn.classList.remove('on'));
+colorSelector.addEventListener('input', changeDrawBtnBackground);
+    if (e.target === drawBtn) {
+        changeDrawBtnBackground();
     currentMode = mode;
 }
 
@@ -90,7 +74,23 @@ function selectColor(e) {
     currentColor = this.value;
 }
 
-function getRandomColor(e) {
+function hexToDecimal(hex) {
+    return parseInt(hex, 16);
+}
+
+function getComplimentaryColor(hexString) {
+    compR = 255 - hexToDecimal(hexString.slice(1,3));
+    compG = 255 - hexToDecimal(hexString.slice(3,5));
+    compB = 255 - hexToDecimal(hexString.slice(5,7));
+    return `rgb(${compR}, ${compG}, ${compB})`;
+}
+
+function changeDrawBtnBackground() {
+    drawBtn.style.backgroundColor = colorSelector.value;
+    drawBtn.style.color = getComplimentaryColor(colorSelector.value);
+}
+
+function getRandomRGB(e) {
     const R = Math.round(Math.random() * 256);
     const G = Math.round(Math.random() * 256);
     const B = Math.round(Math.random() * 256);
