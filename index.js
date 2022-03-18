@@ -12,8 +12,9 @@ const gridlineToggleBtn = document.querySelector('.gridline-toggle');
 const clearBtn = document.querySelector('.clear-all-btn');
 
 
-// on load
+// on page load
 window.addEventListener('load', updatePixelValue);
+colorSelector.value = 'black';
 slider.value = 16;
 
 // toggle states
