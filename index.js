@@ -7,6 +7,7 @@ const eraser = document.querySelector('.eraser');
 const gridlineToggleBtn = document.querySelector('.gridline-toggle');
 
 let currentColor = 'black';
+let defaultMode = true;
 let rainbowMode = false;
 let eraseMode = false;
 let gridlineOff = false;
@@ -87,7 +88,7 @@ function changeColor(e) {
         backgroundColor = getRandomColor();
     } else if (eraseMode) {
         backgroundColor = '#ffffff';
-    } else {
+    } else if (defaultMode) {
         backgroundColor = currentColor;
     } 
     this.style.backgroundColor = backgroundColor;
