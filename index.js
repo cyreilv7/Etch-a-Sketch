@@ -14,7 +14,7 @@ let gridlineOff = false;
 
 // button functionality
 
-colorSelector.addEventListener('change', selectColor);
+colorSelector.addEventListener('input', selectColor);
 
 clearBtn.addEventListener('click', () => {
     createNewGrid(slider.value); // pass in current number of pixels
