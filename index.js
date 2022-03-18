@@ -1,4 +1,9 @@
+// other page elements
 const grid = document.querySelector('.grid');
+const slider = document.querySelector('.slider');
+const sliderOutput = document.querySelector('.slider-output');
+
+// toggles
 const colorSelector = document.querySelector('.color-selector');
 const drawBtn = document.querySelector('draw-btn');
 const clearBtn = document.querySelector('.clear-all-btn');
@@ -6,14 +11,18 @@ const rainbowModeBtn = document.querySelector('.rainbow-mode-btn');
 const eraser = document.querySelector('.eraser');
 const gridlineToggleBtn = document.querySelector('.gridline-toggle');
 
+// on load
+window.addEventListener('load', updatePixelValue);
+slider.value = 16;
+
+// toggle states
 let currentColor = 'black';
 let defaultMode = true;
 let rainbowMode = false;
 let eraseMode = false;
 let gridlineOff = false;
 
-// button functionality
-
+// button functionalities
 colorSelector.addEventListener('input', selectColor);
 
 clearBtn.addEventListener('click', () => {
@@ -32,6 +41,9 @@ eraser.addEventListener('click', () => {
 
 gridlineToggleBtn.addEventListener('click', toggleGridlines);
 
+// change pixel density
+slider.addEventListener('mouseup', updatePixelValue);
+sliderOutput.textContent = `Pixels: ${slider.value}`;
 
 // functions
 function createGrid(canvasWidth, canvasHeight) {
@@ -107,10 +119,3 @@ function toggleGridlines(e) {
         });
     }
 }
-
-// change pixel density based on slider
-const slider = document.querySelector('.slider');
-const sliderOutput = document.querySelector('.slider-output');
-window.addEventListener('load', updatePixelValue);
-slider.addEventListener('mouseup', updatePixelValue);
-sliderOutput.textContent = `Pixels: ${slider.value}`;
