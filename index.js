@@ -6,10 +6,11 @@ const sliderOutput = document.querySelector('.slider-output');
 // toggles
 const colorSelector = document.querySelector('.color-selector');
 const drawBtn = document.querySelector('draw-btn');
-const clearBtn = document.querySelector('.clear-all-btn');
 const rainbowModeBtn = document.querySelector('.rainbow-mode-btn');
 const eraser = document.querySelector('.eraser');
 const gridlineToggleBtn = document.querySelector('.gridline-toggle');
+const clearBtn = document.querySelector('.clear-all-btn');
+
 
 // on load
 window.addEventListener('load', updatePixelValue);
@@ -17,9 +18,8 @@ slider.value = 16;
 
 // toggle states
 let currentColor = 'black';
-let defaultMode = true;
-let rainbowMode = false;
-let eraseMode = false;
+let currentMode = 'defaultMode';
+toggles = [drawBtn, rainbowModeBtn, eraser]
 let gridlineOff = false;
 
 // button functionalities
@@ -40,6 +40,11 @@ eraser.addEventListener('click', () => {
 });
 
 gridlineToggleBtn.addEventListener('click', toggleGridlines);
+
+function changeMode(mode) {
+    toggles.forEach(btn => btn.classList.remove('on'));
+    currentMode = mode;
+}
 
 // change pixel density
 slider.addEventListener('mouseup', updatePixelValue);
