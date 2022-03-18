@@ -31,7 +31,6 @@ h1 {
     margin: 0 auto;
 }
 
-
 .grid {
     display: flex;
     flex-direction: column;
@@ -63,7 +62,6 @@ h1 {
 }
 
 .rainbow-mode-btn.on {
-    border: 2px solid black;
     color: white;
     background: linear-gradient(
         90deg,
@@ -87,6 +85,8 @@ h1 {
 
 button {
     border-radius: .3em;
+    border: 2px solid black;
+
 }
 
 .slider-container {
