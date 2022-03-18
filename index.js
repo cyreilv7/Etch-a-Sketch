@@ -40,13 +40,13 @@ function createGrid(canvasWidth, canvasHeight) {
 
 function createNewGrid(numPixels) {
     grid.innerHTML = '';
-    const canvasWidth = canvasHeight = Math.round(Math.sqrt(numPixels));
+    const canvasWidth = canvasHeight = numPixels;
     createGrid(canvasWidth, canvasHeight);
 }
 
 function updatePixelValue(e) {
     const numPixels = slider.value;
-    sliderOutput.textContent = `Pixels: ${numPixels}`;
+    sliderOutput.textContent = `Grid size: ${numPixels} x ${numPixels}`;
     createNewGrid(numPixels);
 }
 
