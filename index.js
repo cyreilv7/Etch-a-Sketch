@@ -1,3 +1,4 @@
+const grid = document.querySelector('.grid');
 const colorSelector = document.querySelector('.color-selector');
 const drawBtn = document.querySelector('draw-btn');
 const clearBtn = document.querySelector('.clear-all-btn');
