@@ -2,32 +2,43 @@
 const grid = document.querySelector('.grid');
 const slider = document.querySelector('.slider');
 const sliderOutput = document.querySelector('.slider-output');
+const colorSelector = document.querySelector('.color-selector');
+const clearAllBtn = document.querySelector('.clear-all-btn');
 
 // toggles
-const colorSelector = document.querySelector('.color-selector');
-const drawBtn = document.querySelector('draw-btn');
+const drawBtn = document.querySelector('.draw-btn');
 const rainbowModeBtn = document.querySelector('.rainbow-mode-btn');
 const eraser = document.querySelector('.eraser');
 const gridlineToggleBtn = document.querySelector('.gridline-toggle');
-const clearBtn = document.querySelector('.clear-all-btn');
+const toggles = [drawBtn, rainbowModeBtn, eraser];
 
 
 // on page load
 window.addEventListener('load', updatePixelValue);
 colorSelector.value = 'black';
 slider.value = 16;
-
-// toggle states
 let currentColor = 'black';
 let currentMode = 'defaultMode';
-toggles = [drawBtn, rainbowModeBtn, eraser]
 let gridlineOff = false;
 
 // button functionalities
 colorSelector.addEventListener('input', selectColor);
 colorSelector.addEventListener('input', changeDrawBtnBackground);
+drawBtn.onclick = (e) => changeMode(e, 'defaultMode');
+rainbowModeBtn.onclick = (e) => changeMode(e, 'rainbowMode');
+eraser.onclick = (e) => changeMode(e, 'eraseMode');
+clearAllBtn.onclick = () => createNewGrid(slider.value);
+gridlineToggleBtn.onclick = toggleGridlines;
+
+function changeMode(e, mode) {
+    toggles.forEach(btn => btn.classList.remove('on')); // turn off other toggles first
     if (e.target === drawBtn) {
         changeDrawBtnBackground();
+    } else {
+        e.target.classList.toggle('on');
+        drawBtn.style.removeProperty('background-color');
+        drawBtn.style.removeProperty('color');
+    }
     currentMode = mode;
 }
 
@@ -65,11 +76,6 @@ function updatePixelValue(e) {
     createNewGrid(numPixels);
 }
 
-let mouseDown = false;
-document.addEventListener('mousedown', () => mouseDown = true);
-document.addEventListener('mouseup', () => mouseDown = false);
-grid.addEventListener('mouseleave', () => mouseDown = false);
-
 function selectColor(e) {
     currentColor = this.value;
 }
@@ -94,19 +100,24 @@ function getRandomRGB(e) {
     const R = Math.round(Math.random() * 256);
     const G = Math.round(Math.random() * 256);
     const B = Math.round(Math.random() * 256);
-    if (R === 0 && G === 0 && B === 0) return getRandomColor();
+    if (R === 0 && G === 0 && B === 0) return getRandomRGB(); // exclude white
     return `rgb(${R}, ${G}, ${B})`;
 }
+
+let mouseDown = false;
+document.addEventListener('mousedown', () => mouseDown = true);
+document.addEventListener('mouseup', () => mouseDown = false);
+grid.addEventListener('mouseleave', () => mouseDown = false);
 
 function changeColor(e) {
     if (!mouseDown && e.type === 'mouseover') return;
 
     let backgroundColor = '';
-    if (rainbowMode) {
-        backgroundColor = getRandomColor();
-    } else if (eraseMode) {
+    if (currentMode === 'rainbowMode') {
+        backgroundColor = getRandomRGB();
+    } else if (currentMode === 'eraseMode') {
         backgroundColor = '#ffffff';
-    } else if (defaultMode) {
+    } else if (currentMode === 'defaultMode') {
         backgroundColor = currentColor;
     } 
     this.style.backgroundColor = backgroundColor;
