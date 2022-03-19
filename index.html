@@ -10,11 +10,8 @@
     
 </head>
 <body ondragstart="return false;" ondrop="return false;">
-<div id="wrapper">
-    <header class="header">
-        <h1>Etch-a-Sketch</h1>
-    </div>
-    <div class="content">
+<div class="main-container">
+    <div class="left-container">
         <div class="toolbar">
             <input class="color-selector" type="color">
             <button class="draw-btn">Color mode</button>
@@ -27,9 +24,19 @@
                 <div class="slider-output"></div>
             </div>
         </div>
+    </div>
+    <div class="center-container">
+        <header class="header">
+            <h1>Etch-a-Sketch</h1>
+        </header>
         <div class="grid" id="grid"></div>
+        <div class="download-btn-container">
+            Ready to showcase your creation to the world?
+            <button class="download-btn">Save</button>
+        </div>
     </div>
 </div>
+
 
 </body>
 </html>

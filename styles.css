@@ -9,9 +9,23 @@ button {
     font-family: 'Cabin Sketch', cursive;
 }
 
-#wrapper {
+.main-container {
+    display: flex;
+    gap: 100px;
+    margin: 0 auto;
+    width: 1080px;
+}
+
+.left-container {
     display: flex;
     flex-direction: column;
+    margin-top: 8em;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .header {
@@ -91,4 +105,12 @@ button {
 
 .slider-container {
     text-align: center;
+}
+
+.download-btn-container {
+    margin-top: 1em;
+}
+
+.download-btn {
+    margin-left: 1em;
 }
