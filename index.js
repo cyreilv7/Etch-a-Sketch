@@ -4,6 +4,7 @@ const slider = document.querySelector('.slider');
 const sliderOutput = document.querySelector('.slider-output');
 const colorSelector = document.querySelector('.color-selector');
 const clearAllBtn = document.querySelector('.clear-all-btn');
+const downloadBtn = document.querySelector('.download-btn');
 
 // toggles
 const drawBtn = document.querySelector('.draw-btn');
@@ -12,10 +13,9 @@ const eraser = document.querySelector('.eraser');
 const gridlineToggleBtn = document.querySelector('.gridline-toggle');
 const toggles = [drawBtn, rainbowModeBtn, eraser];
 
-
 // on page load
 window.addEventListener('load', updatePixelValue);
-colorSelector.value = 'black';
+colorSelector.value = '#000000';
 slider.value = 16;
 let currentColor = 'black';
 let currentMode = 'defaultMode';
@@ -28,6 +28,8 @@ drawBtn.onclick = (e) => changeMode(e, 'defaultMode');
 rainbowModeBtn.onclick = (e) => changeMode(e, 'rainbowMode');
 eraser.onclick = (e) => changeMode(e, 'eraseMode');
 clearAllBtn.onclick = () => createNewGrid(slider.value);
+downloadBtn.onclick = downloadImage;
+
 gridlineToggleBtn.onclick = toggleGridlines;
 
 function changeMode(e, mode) {
@@ -123,7 +125,7 @@ function changeColor(e) {
     this.style.backgroundColor = backgroundColor;
 }
 
-function toggleGridlines(e) {
+function toggleGridlines() {
     gridlineOff = !gridlineOff;
     const pixels = document.querySelectorAll('.pixel');
     if (gridlineOff) {
@@ -135,4 +137,11 @@ function toggleGridlines(e) {
             pixel.style.removeProperty('border');
         });
     }
+}
+
+function downloadImage() {
+    domtoimage.toBlob(grid)
+    .then(blob => {
+        window.saveAs(blob, 'my-creation.png');
+    });
 }
